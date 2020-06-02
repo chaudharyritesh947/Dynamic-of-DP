@@ -1,0 +1,27 @@
+/*
+This problem is just like the fibonacci one,
+the click is in fib we operating with 2 indexs for calculating the 3rd indices.
+here our parent ans will be dependent on three of its child 
+1. n-1, 
+2. n-2.
+3. n-3
+
+with the help of 1, 2, 3 we can easily cal the n 
+*/
+public static long staircase(int n){
+		
+    if(n==0){return 1l;}
+    long a[] = new long[n+1];
+    a[0]=1L;
+    a[1]=1L;
+    a[2]=2L;
+    
+    for(int i=3;i<=n;i++){
+       
+        a[i] = a[i-1]+a[i-2]+a[i-3];
+    }
+     
+    return a[n];
+	}
+	
+}
