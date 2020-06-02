@@ -1,0 +1,33 @@
+/******************************************************************************
+
+                            Online Java Compiler.
+                Code, Compile, Run and Debug java program online.
+Write your code in this editor and press "Run" button to execute it.
+
+*******************************************************************************/
+
+public class Main
+{
+	public static void main(String[] args) {
+	   
+	}
+	
+   //Longest Increasing subsequence
+   public static int LIS(int a[]){
+       
+     int n = a.length; 
+     int LIS[] = new int[n];
+    
+    int max = 0;
+    for(int i=0;i<n;i++)
+    {
+        for(int j=i-1;j>=0;j--){
+            if(a[i]>a[j]){
+                LIS[i] =    Math.max(LIS[j]+1, LIS[i]);
+                if(LIS[i]>max){max=LIS[i];}
+            }
+        }
+    }
+    return max;
+     }
+}
