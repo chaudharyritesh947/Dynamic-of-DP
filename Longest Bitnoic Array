@@ -1,0 +1,94 @@
+You are given an array of positive integers as input. Write a code to return the length of the largest such subsequence in which the values are arranged first in strictly ascending order and then in strictly descending order.
+Such a subsequence is known as bitonic subsequence. A purely increasing or purely decreasing subsequence will also be considered as a bitonic sequence with the other part empty.
+Note that the elements in bitonic subsequence need not be consecutive in the given array but the order should remain same.
+Input Format:
+Line 1 : A positive Integer N, i.e., the size of array
+Line 2 : N space-separated integers as elements of the array 
+Output Format:
+Length of Largest Bitonic subsequence
+Input Constraints:
+1<= N <= 100000
+Sample Input 1:
+6
+15 20 20 6 4 2
+Sample Output 1:
+5
+Sample Output 1 Explanation:
+Here, longest Bitonic subsequence is {15, 20, 6, 4, 2} which has length = 5.
+Sample Input 2:
+2
+1 5
+Sample Output 2:
+2
+Sample Input 3:
+2
+5 1
+Sample Output 3:
+2
+
+
+
+
+
+_________________________________________________________________________________________________________________________________
+The concept is we are going to maintain an array which will be storing the LIS and LDS at any particulat point, the max will the ans.
+/******************************************************************************
+
+                            Online Java Compiler.
+                Code, Compile, Run and Debug java program online.
+Write your code in this editor and press "Run" button to execute it.
+
+*******************************************************************************/
+
+public class Main
+{
+	public static void main(String[] args) {
+	   
+	}
+
+   public static int LargestBitnoicSubseq(int[] a){
+       
+       int []LIS = getLis(a);
+       int []LDS = getLds(a);
+       
+       int max = 0;
+       int len = LIS.length;
+       for(int i=0;i<len;i++){
+           int temp = LIS[i] + LDS[i] - 1;
+           if(max > temp){
+               max = temp;
+           }
+       }
+       return max;
+   }
+   
+
+ public static int[] getLis(int a[]){
+     int lis[] = new int[a.length];
+     for(int i=0;i<a.length;i++){
+         for(int j = i-1; j>=0;j--){
+             if(a[i]>a[j]){
+                 lis[i] = Math.max(lis[j] + 1, lis[i]);
+             }
+         }
+     }
+     
+     return lis;
+ }
+ 
+ public static int[] getLds(int a[]){
+     int lds[] = new int[a.length];
+     for(int i=a.length - 1;i>=0;i--){
+         for(int j = i-1; j<a.length;j++){
+             if(a[i]>a[j]){
+                 lds[i] = Math.max(lds[j] + 1, lds[i]);
+             }
+         }
+     }
+     
+     return lds;
+ }
+}
+---------------------------------------------------------------------------------------------------------------------------------------
+The basic intution is Mountain shape can only be formed  by the internsection of cueves reperesenting the peaks in right and peaks in left 
+
