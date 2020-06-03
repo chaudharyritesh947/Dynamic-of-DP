@@ -1,0 +1,28 @@
+The Problem is Given a mattrix, where each cell has some value, consider the values to be equal to cost which we need to give if we are pasing from the cell
+so we need to find the minimum cost we are gonna spend when we are standing at arr[0][0]  and we need to go to arr[last row][last column]
+
+
+    public static int MinCostMatrix(int a[][]){
+        
+        int n = a.length;
+        int resMat[][] = new int[n][n];
+        resMat[n-1][n-1]  =  a[n-1][n-1];
+        
+        //Fillin the Base case for the array:)
+        for(int i=n-2;i>=0;i--){
+            resMat[n-1][i]+=resMat[n-1][i+1];
+            resMat[i][n-1]+=resMat[i+1][n-1];
+        }
+        
+        for(int i=n-2;i>=0;i--){
+            for(int j = n-2; j>=0;j--){
+                resMat[i][j] = a[i][j] + Math.min(resMat[i+1][j], Math.min(resMat[i+1][j+1],resMat[j][i+1]));
+            }
+        }
+        
+        
+      resMat[0][0];
+    }
+    
+    //Reach out to me for more clearification
+    +91-9140300647
