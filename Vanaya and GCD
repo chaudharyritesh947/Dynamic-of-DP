@@ -1,0 +1,49 @@
+import java.util.*;
+
+public class Main {
+
+    public static int gcd(int a, int b){
+    if(b==0)return a;
+    return gcd(b, a%b);
+    }
+	
+	public static void main(String[] args) {
+	Scanner sc  =  new Scanner(System.in);
+    int n  = sc.nextInt();   
+    int m = 0;
+        int mod = 1000000007;
+    int dp[][] = new int[501][101];
+        int a[] = new int[501];
+    for(int i=0;i<n;i++){
+		a[i] = sc.nextInt();
+        m=Math.max(a[i],m);//Just taking the max inorder to find the gcd from 1 to m.
+       dp[i][a[i]] = 1;
+    }
+    
+        //Logic for finding the max incr sub seq.
+    for(int i=1;i<n;i++){
+        for(int j=0;j<i;j++){
+            
+            if(a[i]>a[j]){
+              
+                for(int g = 1; g<=m;g++){
+                    int ng = gcd(g,a[i]);
+                    dp[i][ng] += dp[j][g];
+                    if(dp[i][ng]>= mod){
+                        dp[i][ng]-=mod;
+                    }                    
+                }
+            }
+        }
+    }
+        
+        //Logic part is done just extracting the data.
+        int sum=0 ;
+        for(int i=0;i<n;i++){
+            sum+=dp[i][1];
+            if(sum >= mod)sum-=mod;
+        }
+		System.out.println(sum);
+	}
+
+}
