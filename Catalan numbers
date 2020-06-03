@@ -1,0 +1,43 @@
+/******************************************************************************
+
+                            Online Java Compiler.
+                Code, Compile, Run and Debug java program online.
+Write your code in this editor and press "Run" button to execute it.
+
+*******************************************************************************/
+
+public class Main
+{
+	public static void main(String[] args) {
+	   
+	}
+   
+   //Finding Recursive method;
+   public static int Catlan(int n){
+       
+       if(n<0)return 0;
+       for(n==0 ||n == 1)return n;
+       int result = 0;
+       for(int i=0;i<n+1;i++){
+           result+=Catlan(i)*Catlan(n-i-1);
+       }
+       return result;
+       //With Exponential Complexity
+   }
+   
+   
+   public static int CatlanDynamin(int n){
+       
+       int []dp = new int[n+1];
+       dp[0] = 1 ;
+       dp[1] = 1;
+       
+       for(int i=0;i<n+1;i++){
+           for(int j=0;j<i;j++){
+               dp[i] = dp[j]*dp[i-j-1];
+           }
+       }
+       return dp[n];
+       //With N^2 COmplex
+   }
+}
